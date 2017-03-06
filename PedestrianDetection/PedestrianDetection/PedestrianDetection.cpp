@@ -12,9 +12,9 @@ void runHOG() {
 
 int main(int argc, char* argv[])
 {
-	std::thread first(runMOG);
-	//std::thread second(runHOG);
-	first.join();
-	//second.join();
+	//std::thread first(runMOG);
+	std::thread second(runHOG);
+	//first.join();
+	second.join();
 	return 0;
 }
