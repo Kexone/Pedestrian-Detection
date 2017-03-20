@@ -4,7 +4,7 @@ class MOGDetection {
 public:
 	MOGDetection();
 	~MOGDetection();
-	void detect();
+	void static detect(cv::Mat frame);
 private:
 
 };

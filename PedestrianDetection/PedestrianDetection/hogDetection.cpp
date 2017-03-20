@@ -11,8 +11,7 @@ void HOGDetection::detect() {
 	cv::HOGDescriptor hog;
 	hog.setSVMDetector(cv::HOGDescriptor::getDefaultPeopleDetector());
 	cv::namedWindow("output", 1);
-	//cv::VideoCapture cap;
-	cv::VideoCapture &cap = CaptureVideo::getInstance();
+cv::VideoCapture cap;
 	// open the default camera, use something different from 0 otherwise;
 	// Check VideoCapture documentation.
 	if (!cap.open(0))

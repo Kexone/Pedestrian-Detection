@@ -155,6 +155,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="captureVideo.cpp" />
     <ClCompile Include="hogDetection.cpp" />
     <ClCompile Include="mogDetection.cpp" />
     <ClCompile Include="PedestrianDetection.cpp" />
