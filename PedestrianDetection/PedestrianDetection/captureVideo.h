@@ -1,15 +1,10 @@
 #pragma once
 class CaptureVideo {
 private:
-	
-	CaptureVideo() { };
+	cv::VideoCapture capture;
 public:
+	CaptureVideo(std::string filename);
 	~CaptureVideo() { }
-	static cv::VideoCapture& getInstance() {
-		static cv::VideoCapture capture;
-		if(!capture.open(0))
-			return capture;
-		return capture;
-	}
+	void processVideo();
 
 };
