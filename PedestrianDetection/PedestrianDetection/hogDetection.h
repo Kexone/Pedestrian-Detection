@@ -4,7 +4,7 @@ class HOGDetection {
 public:
 	HOGDetection();
 	~HOGDetection();
-	void detect();
+	std::vector<cv::Rect> detect(cv::Mat &frame);
 private:
-
+	cv::HOGDescriptor hog;
 };

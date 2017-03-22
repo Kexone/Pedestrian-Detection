@@ -4,7 +4,8 @@ class MOGDetection {
 public:
 	MOGDetection();
 	~MOGDetection();
-	void static detect(cv::Mat frame);
+	cv::Mat detect(cv::Mat &frame);
 private:
-
+	cv::Ptr<cv::BackgroundSubtractor> pMOG; //MOG Background subtractor
+	cv::Ptr<cv::BackgroundSubtractor> pMOG2;
 };
