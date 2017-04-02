@@ -36,6 +36,7 @@ void CaptureVideo::processVideo()
 			r.height = cvRound(r.height*0.8);
 			rectangle(frame, r.tl(), r.br(), cv::Scalar(0, 255, 0), 3);
 		}
+		cv::imshow("mog2", frameMog);
 		cv::imshow("source", frame);
 		cv::waitKey(1);
 		frame.release();
