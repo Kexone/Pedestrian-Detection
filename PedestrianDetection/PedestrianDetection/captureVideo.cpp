@@ -31,10 +31,10 @@ void CaptureVideo::processVideo()
 		src_gray = frameMog.clone();
 		//cv::cvtColor(frameMog, src_gray, CV_BGR2GRAY);
 		
-		cv::blur(src_gray, src_gray, cv::Size(2, 2));
-		ConvexHull *ch = new ConvexHull(frameMog, src_gray, 20);
+		cv::blur(src_gray, src_gray, cv::Size(4, 4));
+		ConvexHull *ch = new ConvexHull(frameMog, src_gray, 0);
 		hulls = ch->thresh_callback(0, 0);
-		found_filtered = hogDetect.detect(hulls);
+		//found_filtered = hogDetect.detect(hulls);
 		for (int i = 0; i < found_filtered.size(); i++)
 		{
 			cv::Rect r = found_filtered[i];
