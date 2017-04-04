@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "convexHull.h"
 
 CaptureVideo::CaptureVideo(std::string filename)
 { 
@@ -10,13 +11,13 @@ CaptureVideo::CaptureVideo(std::string filename)
 
 void CaptureVideo::processVideo()
 {
-	cv::Mat frame, frameMog;
+	cv::Mat frame, frameMog, src_gray;
 	
 	if (!capture.isOpened()) {
 		std::cout << "Could not open reference " << std::endl;
 		return;
 	}
-
+	std::vector<std::vector<cv::Point>>hulls;
 	MOGDetection detector;
 	HOGDetection hogDetect;
 	std::vector<cv::Rect> found_filtered;
@@ -24,9 +25,16 @@ void CaptureVideo::processVideo()
 	{
 		capture >> frame;
 		if (frame.empty())
-			break;
+			capture.set(1,0.0);
+			//break;
 		frameMog = detector.detect(frame);
-		found_filtered = hogDetect.detect(frameMog);
+		src_gray = frameMog.clone();
+		//cv::cvtColor(frameMog, src_gray, CV_BGR2GRAY);
+		
+		cv::blur(src_gray, src_gray, cv::Size(2, 2));
+		ConvexHull *ch = new ConvexHull(frameMog, src_gray, 20);
+		hulls = ch->thresh_callback(0, 0);
+		found_filtered = hogDetect.detect(hulls);
 		for (int i = 0; i < found_filtered.size(); i++)
 		{
 			cv::Rect r = found_filtered[i];
