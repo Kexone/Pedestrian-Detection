@@ -20,10 +20,10 @@ int main(int argc, char* argv[])
 	ConvexHull *ch = new ConvexHull(src, src_gray, thresh);
 	ch->thresh_callback(0, 0);*/
 	//CaptureVideo captureVid = CaptureVideo("../long_hd.mp4");
-	//CaptureVideo captureVid = CaptureVideo("../long_vga.mp4");
+	CaptureVideo captureVid = CaptureVideo("../long_vga.mp4");
 	//CaptureVideo captureVid = CaptureVideo("../short_hd.mp4");
 	//CaptureVideo captureVid = CaptureVideo("../short_vga.mp4");
-	CaptureVideo captureVid = CaptureVideo("../test.mov");
+	//CaptureVideo captureVid = CaptureVideo("../test.mov");
 
 	captureVid.processVideo();
 	cv::waitKey(0);

@@ -46,7 +46,7 @@ void CaptureVideo::processVideo()
 		}
 		cv::imshow("mog2", frameMog);
 		cv::imshow("source", frame);
-		cv::waitKey(1);
+		cv::waitKey(30);
 		frame.release();
 	}
 }

@@ -27,6 +27,7 @@ std::vector<std::vector<cv::Point>> ConvexHull::thresh_callback(int, void*)
 {
 	cv::RNG rng(12345);
 	cv::Mat src_copy = src.clone();
+	cv::Mat orig = src.clone();
 	cv::Mat threshold_output;
 	std::vector<std::vector<cv::Point> > contours;
 	std::vector<cv::Vec4i> hierarchy;
@@ -70,12 +71,13 @@ std::vector<std::vector<cv::Point>> ConvexHull::thresh_callback(int, void*)
 	for (int i = 0; i < filteredHulls.size(); i++)
 	{
 		cv::Scalar color = cv::Scalar(rng.uniform(0, 255), rng.uniform(0, 255), rng.uniform(0, 255));
-		drawContours(drawing, contours, i, color, 1, 8, std::vector<cv::Vec4i>(), 0, cv::Point());
-		drawContours(drawing, filteredHulls, i, color, 1, 8, std::vector<cv::Vec4i>(), 0, cv::Point());
+		//drawContours(drawing, contours, i, color, 1, 8, std::vector<cv::Vec4i>(), 0, cv::Point());
+		drawContours(orig, filteredHulls, i, color, 1, 8, std::vector<cv::Vec4i>(), 0, cv::Point());
+		//drawContours(drawing, filteredHulls, i, color, 1, 8, std::vector<cv::Vec4i>(), 0, cv::Point());
 	}
 
 	/// Show in a window
 	cv::namedWindow("Hull demo", CV_WINDOW_AUTOSIZE);
-	imshow("Hull demo", drawing);
+	imshow("Hull demo", orig);
 	return filteredHulls;
 }
