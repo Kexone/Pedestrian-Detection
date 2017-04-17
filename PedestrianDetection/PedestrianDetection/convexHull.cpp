@@ -23,7 +23,7 @@ ConvexHull::~ConvexHull()
 
 
 /** @function thresh_callback */
-std::vector<std::vector<cv::Point>> ConvexHull::thresh_callback(int, void*)
+std::vector<std::vector<cv::Rect>> ConvexHull::thresh_callback(int, void*)
 {
 	cv::RNG rng(12345);
 	cv::Mat src_copy = src.clone();
@@ -67,17 +67,27 @@ std::vector<std::vector<cv::Point>> ConvexHull::thresh_callback(int, void*)
 
 
 	/// Draw contours + hull results
+	std::vector<std::vector<cv::Rect>> react(filteredHulls.size());
 	cv::Mat drawing = cv::Mat::zeros(threshold_output.size(), CV_8UC3);
 	for (int i = 0; i < filteredHulls.size(); i++)
 	{
+		int minX = INT_MAX, minY = INT_MAX, maxY = 0, maxX = 0;
+		for (auto &p : filteredHulls[i]) {
+			if (p.x <= minX) minX = p.x;
+			if (p.y <= minY) minY = p.y;
+			if (p.x >= maxX) maxX = p.x;
+			if (p.y >= maxY) maxY = p.y;
+		}
 		cv::Scalar color = cv::Scalar(rng.uniform(0, 255), rng.uniform(0, 255), rng.uniform(0, 255));
 		//drawContours(drawing, contours, i, color, 1, 8, std::vector<cv::Vec4i>(), 0, cv::Point());
 		drawContours(orig, filteredHulls, i, color, 1, 8, std::vector<cv::Vec4i>(), 0, cv::Point());
 		//drawContours(drawing, filteredHulls, i, color, 1, 8, std::vector<cv::Vec4i>(), 0, cv::Point());
+		cv::Rect rectangle = cv::Rect(cv::Point(minX, minY), cv::Point(maxX, maxY));
+		react[i].push_back(rectangle);
 	}
 
 	/// Show in a window
 	cv::namedWindow("Hull demo", CV_WINDOW_AUTOSIZE);
 	imshow("Hull demo", orig);
-	return filteredHulls;
+	return react;
 }

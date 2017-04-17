@@ -18,6 +18,7 @@ void CaptureVideo::processVideo()
 		return;
 	}
 	std::vector<std::vector<cv::Point>>hulls;
+	std::vector<std::vector<cv::Rect>> rect;
 	MOGDetection detector;
 	HOGDetection hogDetect;
 	std::vector<cv::Rect> found_filtered;
@@ -32,8 +33,29 @@ void CaptureVideo::processVideo()
 		//cv::cvtColor(frameMog, src_gray, CV_BGR2GRAY);
 		
 		cv::blur(src_gray, src_gray, cv::Size(4, 4));
-		ConvexHull *ch = new ConvexHull(frameMog, src_gray, 0);
-		hulls = ch->thresh_callback(0, 0);
+		ConvexHull *ch = new ConvexHull(frame, src_gray, 0);
+		rect = ch->thresh_callback(0, 0);
+		std::vector<cv::Mat> croppedMats;
+		if(rect.size() != 0)
+		for (int i = 0; i < rect[0].size(); i++)
+		{
+			cv::Mat croppedMat = frame.clone();
+			std::cout << "Before:" << croppedMat.rows << " x " << croppedMat.cols << std::endl;
+
+			croppedMat = croppedMat(rect[0][i]);
+
+			croppedMats.push_back(croppedMat.clone());
+			//if(croppedMat.cols != 0)
+			std::cout << "After: " << croppedMat.rows << " x " << croppedMat.cols << std::endl;
+			std::cout << "Crop:" << rect.size() << std::endl;
+			cv::imshow("test", croppedMat);
+			//croppedMat.release();
+		}
+		for(int i = 0; i < croppedMats.size(); i++)
+		{
+			found_filtered.push_back(hogDetect.detect(croppedMats.pop_back()));
+
+		}
 		//found_filtered = hogDetect.detect(hulls);
 		for (int i = 0; i < found_filtered.size(); i++)
 		{
