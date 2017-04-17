@@ -21,7 +21,7 @@ void CaptureVideo::processVideo()
 	std::vector<std::vector<cv::Rect>> rect;
 	MOGDetection detector;
 	HOGDetection hogDetect;
-	std::vector<cv::Rect> found_filtered;
+	std::vector<std::vector<cv::Rect>> found_filtered;
 	for (; ;)
 	{
 		capture >> frame;
@@ -37,34 +37,36 @@ void CaptureVideo::processVideo()
 		rect = ch->thresh_callback(0, 0);
 		std::vector<cv::Mat> croppedMats;
 		if(rect.size() != 0)
-		for (int i = 0; i < rect[0].size(); i++)
-		{
-			cv::Mat croppedMat = frame.clone();
-			std::cout << "Before:" << croppedMat.rows << " x " << croppedMat.cols << std::endl;
+			for (int j = 0; j < rect.size(); j++) {
+				for (int i = 0; i < rect[j].size(); i++)
+				{
+					std::cout << "RECT" << rect.size() << "   RECT[0] " << rect[0].size() << std::endl;
+					cv::Mat croppedMat = frame.clone();
+					std::cout << "Before:" << croppedMat.rows << " x " << croppedMat.cols << std::endl;
 
-			croppedMat = croppedMat(rect[0][i]);
+					croppedMat = croppedMat(rect[j][i]);
 
-			croppedMats.push_back(croppedMat.clone());
-			//if(croppedMat.cols != 0)
-			std::cout << "After: " << croppedMat.rows << " x " << croppedMat.cols << std::endl;
-			std::cout << "Crop:" << rect.size() << std::endl;
-			cv::imshow("test", croppedMat);
-			//croppedMat.release();
-		}
-		for(int i = 0; i < croppedMats.size(); i++)
-		{
-			found_filtered.push_back(hogDetect.detect(croppedMats.pop_back()));
-
-		}
+					croppedMats.push_back(croppedMat.clone());
+					//if(croppedMat.cols != 0)
+					std::cout << "After: " << croppedMat.rows << " x " << croppedMat.cols << std::endl;
+					std::cout << "Crop:" << rect.size() << std::endl;
+					cv::imshow("test", croppedMat);
+					//croppedMat.release();
+				}
+			}
+		//found_filtered = hogDetect.detect(croppedMats);
 		//found_filtered = hogDetect.detect(hulls);
-		for (int i = 0; i < found_filtered.size(); i++)
-		{
-			cv::Rect r = found_filtered[i];
-			r.x += cvRound(r.width*0.1);
-			r.width = cvRound(r.width*0.8);
-			r.y += cvRound(r.height*0.07);
-			r.height = cvRound(r.height*0.8);
-			rectangle(frame, r.tl(), r.br(), cv::Scalar(0, 255, 0), 3);
+		std::cout << "________________________________cropped mats per cyclus: " << croppedMats.size() << std::endl;
+		for (int j = 0; j < found_filtered.size(); j++) {
+			for (int i = 0; i < found_filtered[j].size(); i++)
+			{
+				cv::Rect r = found_filtered[j][i];
+				r.x += cvRound(r.width*0.1);
+				r.width = cvRound(r.width*0.8);
+				r.y += cvRound(r.height*0.07);
+				r.height = cvRound(r.height*0.8);
+				rectangle(frame, r.tl(), r.br(), cv::Scalar(0, 255, 0), 3);
+			}
 		}
 		cv::imshow("mog2", frameMog);
 		cv::imshow("source", frame);
