@@ -45,18 +45,19 @@ void CaptureVideo::processVideo()
 					std::cout << "Before:" << croppedMat.rows << " x " << croppedMat.cols << std::endl;
 
 					croppedMat = croppedMat(rect[j][i]);
-
-					croppedMats.push_back(croppedMat.clone());
-					//if(croppedMat.cols != 0)
-					std::cout << "After: " << croppedMat.rows << " x " << croppedMat.cols << std::endl;
-					std::cout << "Crop:" << rect.size() << std::endl;
-					cv::imshow("test", croppedMat);
+					//if (croppedMat.cols / croppedMat.rows >= 1.5) {
+						croppedMats.push_back(croppedMat.clone());
+						//if(croppedMat.cols != 0)
+						std::cout << "After: " << croppedMat.rows << " x " << croppedMat.cols << std::endl;
+						std::cout << "Crop:" << rect.size() << std::endl;
+					//}
 					//croppedMat.release();
 				}
 			}
-		//found_filtered = hogDetect.detect(croppedMats);
-		//found_filtered = hogDetect.detect(hulls);
 		std::cout << "________________________________cropped mats per cyclus: " << croppedMats.size() << std::endl;
+		found_filtered = hogDetect.detect(croppedMats);
+		std::cout << "______detect on mats: " << found_filtered.size() << std::endl;
+		//found_filtered = hogDetect.detect(hulls);
 		for (int j = 0; j < found_filtered.size(); j++) {
 			for (int i = 0; i < found_filtered[j].size(); i++)
 			{
