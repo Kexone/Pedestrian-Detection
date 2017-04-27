@@ -36,6 +36,9 @@
     <ClInclude Include="convexHull.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CroppedImage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -55,6 +58,9 @@
     </ClCompile>
     <ClCompile Include="convexHull.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CroppedImage.cpp">
+      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

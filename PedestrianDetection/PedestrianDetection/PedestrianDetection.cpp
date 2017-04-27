@@ -22,8 +22,8 @@ int main(int argc, char* argv[])
 	//CaptureVideo captureVid = CaptureVideo("../long_hd.mp4");
 	//CaptureVideo captureVid = CaptureVideo("../long_vga.mp4");
 	//CaptureVideo captureVid = CaptureVideo("../short_hd.mp4");
-	CaptureVideo captureVid = CaptureVideo("../short_vga.mp4");
-	//CaptureVideo captureVid = CaptureVideo("../test.mov");
+	//CaptureVideo captureVid = CaptureVideo("../short_vga.mp4");
+	CaptureVideo captureVid = CaptureVideo("../test.mov");
 
 	captureVid.processVideo();
 	cv::waitKey(0);

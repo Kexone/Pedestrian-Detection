@@ -11,5 +11,6 @@ private:
 	cv::Mat src;
 	cv::Mat src_gray;
 	int thresh;
+	
 };
 

@@ -175,6 +175,7 @@ copy "$(OpenCV_dir)\bin\opencv_videoio320.dll" "$(OutDir)"</Command>
   <ItemGroup>
     <ClInclude Include="captureVideo.h" />
     <ClInclude Include="convexHull.h" />
+    <ClInclude Include="CroppedImage.h" />
     <ClInclude Include="hogDetection.h" />
     <ClInclude Include="mogDetection.h" />
     <ClInclude Include="stdafx.h" />
@@ -183,6 +184,7 @@ copy "$(OpenCV_dir)\bin\opencv_videoio320.dll" "$(OutDir)"</Command>
   <ItemGroup>
     <ClCompile Include="captureVideo.cpp" />
     <ClCompile Include="convexHull.cpp" />
+    <ClCompile Include="CroppedImage.cpp" />
     <ClCompile Include="hogDetection.cpp" />
     <ClCompile Include="mogDetection.cpp" />
     <ClCompile Include="PedestrianDetection.cpp" />
