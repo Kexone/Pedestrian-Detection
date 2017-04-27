@@ -46,7 +46,7 @@ std::vector<std::vector<cv::Rect>> ConvexHull::thresh_callback(int, void*)
 	}
 
 	std::vector<std::vector<cv::Point>>filteredHulls;
-	int minThresholdArea = 50 * 50 , maxThresholdArea = 400 * 100;
+	int minThresholdArea = 100 * 150 , maxThresholdArea = 400 * 400;
 
 	for (int i = 0; i < hull.size(); i++) {
 		int minX = INT_MAX, minY = INT_MAX, maxY = 0, maxX = 0;

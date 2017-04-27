@@ -19,11 +19,13 @@ int main(int argc, char* argv[])
 	cv::imshow(source_window, src);
 	ConvexHull *ch = new ConvexHull(src, src_gray, thresh);
 	ch->thresh_callback(0, 0);*/
+	//CaptureVideo captureVid = CaptureVideo("../cctv3.mov");
+	//CaptureVideo captureVid = CaptureVideo("../cctv2.mov");
+	//CaptureVideo captureVid = CaptureVideo("../cctv1.mov");
 	//CaptureVideo captureVid = CaptureVideo("../long_hd.mp4");
 	//CaptureVideo captureVid = CaptureVideo("../long_vga.mp4");
 	//CaptureVideo captureVid = CaptureVideo("../short_hd.mp4");
-	//CaptureVideo captureVid = CaptureVideo("../short_vga.mp4");
-	CaptureVideo captureVid = CaptureVideo("../test.mov");
+	CaptureVideo captureVid = CaptureVideo("../short_vga.mp4");
 
 	captureVid.processVideo();
 	cv::waitKey(0);
