@@ -5,6 +5,7 @@ class CaptureVideo {
 private:
 	cv::VideoCapture capture;
 public:
+	CaptureVideo();
 	CaptureVideo(std::string filename);
 	CroppedImage createStruct(cv::Mat frame, cv::Rect cropping);
 	~CaptureVideo() { }

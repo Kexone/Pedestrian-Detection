@@ -3,6 +3,10 @@
 
 struct CroppedImage;
 
+CaptureVideo::CaptureVideo()
+{
+}
+
 CaptureVideo::CaptureVideo(std::string filename)
 { 
 	capture.open(filename); 
