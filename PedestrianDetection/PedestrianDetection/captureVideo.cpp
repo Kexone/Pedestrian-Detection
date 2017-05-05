@@ -26,9 +26,9 @@ void CaptureVideo::processVideo()
 	std::vector<std::vector<cv::Point>>hulls;
 	std::vector<std::vector<cv::Rect>> rect;
 	std::vector<std::vector<cv::Rect>> found_filtered;
-	cv::namedWindow("MOG 2014", CV_WINDOW_AUTOSIZE);
+	//cv::namedWindow("MOG 2014", CV_WINDOW_AUTOSIZE);
 	cv::namedWindow("Result", CV_WINDOW_AUTOSIZE);
-	cv::namedWindow("Hull demo", CV_WINDOW_AUTOSIZE);
+	//cv::namedWindow("Hull demo", CV_WINDOW_AUTOSIZE);
 	MOGDetection detector;
 	HOGDetection hogDetect;
 	startTime = (double)cv::getTickCount();
@@ -75,7 +75,7 @@ void CaptureVideo::processVideo()
 				rectangle(frame, r.tl(), r.br(), cv::Scalar(0, 255, 0), 3);
 			}
 		}
-		cv::imshow("MOG 2014", frameMog);
+		//cv::imshow("MOG 2014", frameMog);
 		cv::imshow("Result", frame);
 		cv::waitKey(20);
 		frame.release();
