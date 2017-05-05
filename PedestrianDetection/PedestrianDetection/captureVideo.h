@@ -13,4 +13,8 @@ public:
 
 private:
 	int id = 0;
+	int totalFrames = 0;
+	double startTime = 0;
+	double endTime = 0;
+	double fps = 0;
 };

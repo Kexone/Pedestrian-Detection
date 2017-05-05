@@ -50,7 +50,7 @@ std::vector<std::vector<cv::Rect>> HOGDetection::detect(std::vector<CroppedImage
 			//cv::Mat test = resizeImage(frames[x].croppedImg, cv::Size(64, 128));
 			//hog.detectMultiScale(test, found, 0, cv::Size(6, 6), cv::Size(32, 32), 1.05, 2);
 			hog.detectMultiScale(test, found, 0, cv::Size(4, 4), cv::Size(32,32), 1.05, 2);
-			
+
 			if (found.empty()) {
 			//	frames._Pop_back_n(x);
 				continue;

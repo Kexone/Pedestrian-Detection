@@ -87,7 +87,6 @@ std::vector<std::vector<cv::Rect>> ConvexHull::thresh_callback(int, void*)
 	}
 
 	/// Show in a window
-	cv::namedWindow("Hull demo", CV_WINDOW_AUTOSIZE);
 	imshow("Hull demo", orig);
 	return react;
 }

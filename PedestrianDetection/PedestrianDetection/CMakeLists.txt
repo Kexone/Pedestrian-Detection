@@ -13,6 +13,6 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 include_directories(${OPENCV}/include)
 link_directories(${OPENCV}/lib)
 
-add_executable(SP PedestrianDetection.cpp hogDetection.cpp mogDetection.cpp captureVideo.cpp CroppedImage.cpp)
+add_executable(SP PedestrianDetection.cpp hogDetection.cpp mogDetection.cpp captureVideo.cpp convexHull.cpp CroppedImage.cpp)
 target_link_libraries(SP opencv_core opencv_highgui opencv_bgsegm
 opencv_imgproc opencv_video opencv_videoio opencv_objdetect)
