@@ -26,12 +26,13 @@ void CaptureVideo::processVideo()
 	std::vector<std::vector<cv::Point>>hulls;
 	std::vector<std::vector<cv::Rect>> rect;
 	std::vector<std::vector<cv::Rect>> found_filtered;
-	cv::namedWindow("MOG 2014", CV_WINDOW_AUTOSIZE);
+	//cv::namedWindow("MOG 2014", CV_WINDOW_AUTOSIZE);
 	cv::namedWindow("Result", CV_WINDOW_AUTOSIZE);
-	cv::namedWindow("Hull demo", CV_WINDOW_AUTOSIZE);
+	//cv::namedWindow("Hull demo", CV_WINDOW_AUTOSIZE);
 	MOGDetection detector;
 	HOGDetection hogDetect;
 	startTime = (double)cv::getTickCount();
+	ConvexHull *ch = new ConvexHull();
 	for (; ;)
 	{
 		capture >> frame;
@@ -51,8 +52,9 @@ void CaptureVideo::processVideo()
 		frameMog = detector.detect(blured);
 		src_gray = frameMog.clone();
 		cv::blur(src_gray, src_gray, cv::Size(10,10));
-		ConvexHull *ch = new ConvexHull(frame, src_gray, 0);
+		ch = new ConvexHull(frame, src_gray, 0);
 		rect = ch->thresh_callback(0, 0);
+		delete ch;
 		std::vector<cv::Mat> croppedMats;
 		std::vector<CroppedImage> croppedImages;
 		if(rect.size() != 0)
@@ -75,10 +77,13 @@ void CaptureVideo::processVideo()
 				rectangle(frame, r.tl(), r.br(), cv::Scalar(0, 255, 0), 3);
 			}
 		}
-		cv::imshow("MOG 2014", frameMog);
+		//cv::imshow("MOG 2014", frameMog);
 		cv::imshow("Result", frame);
 		cv::waitKey(20);
 		frame.release();
+		blured.release();
+		frameMog.release();
+		src_gray.release();
 		totalFrames++;
 	}
 }

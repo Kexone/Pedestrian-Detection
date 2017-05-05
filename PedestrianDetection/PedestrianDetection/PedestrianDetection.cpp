@@ -24,10 +24,9 @@ int main(int argc, char* argv[])
 		captureVid = CaptureVideo(argv[1]);
 	}
 	else
-		captureVid = CaptureVideo(filenames[10]);
+		captureVid = CaptureVideo(filenames[7]);
 
 	captureVid.processVideo();
-	std::cout << "ENDE";
 	cv::waitKey(0);
 	return 0;
 }
