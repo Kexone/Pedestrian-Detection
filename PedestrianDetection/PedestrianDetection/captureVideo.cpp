@@ -32,6 +32,7 @@ void CaptureVideo::processVideo()
 	MOGDetection detector;
 	HOGDetection hogDetect;
 	startTime = (double)cv::getTickCount();
+	ConvexHull *ch = new ConvexHull();
 	for (; ;)
 	{
 		capture >> frame;
@@ -51,8 +52,9 @@ void CaptureVideo::processVideo()
 		frameMog = detector.detect(blured);
 		src_gray = frameMog.clone();
 		cv::blur(src_gray, src_gray, cv::Size(10,10));
-		ConvexHull *ch = new ConvexHull(frame, src_gray, 0);
+		ch = new ConvexHull(frame, src_gray, 0);
 		rect = ch->thresh_callback(0, 0);
+		delete ch;
 		std::vector<cv::Mat> croppedMats;
 		std::vector<CroppedImage> croppedImages;
 		if(rect.size() != 0)
@@ -79,6 +81,9 @@ void CaptureVideo::processVideo()
 		cv::imshow("Result", frame);
 		cv::waitKey(20);
 		frame.release();
+		blured.release();
+		frameMog.release();
+		src_gray.release();
 		totalFrames++;
 	}
 }
